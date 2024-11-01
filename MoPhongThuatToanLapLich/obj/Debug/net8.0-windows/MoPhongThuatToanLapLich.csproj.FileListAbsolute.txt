@@ -1,0 +1,17 @@
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\MoPhongThuatToanLapLich.Form1.resources
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\MoPhongThuatToanLapLich.csproj.GenerateResource.cache
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\MoPhongThuatToanLapLich.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\MoPhongThuatToanLapLich.AssemblyInfoInputs.cache
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\MoPhongThuatToanLapLich.AssemblyInfo.cs
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\MoPhongThuatToanLapLich.csproj.CoreCompileInputs.cache
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\MoPhongThuatToanLapLich.sourcelink.json
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\bin\Debug\net8.0-windows\MoPhongThuatToanLapLich.exe
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\bin\Debug\net8.0-windows\MoPhongThuatToanLapLich.deps.json
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\bin\Debug\net8.0-windows\MoPhongThuatToanLapLich.runtimeconfig.json
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\bin\Debug\net8.0-windows\MoPhongThuatToanLapLich.dll
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\bin\Debug\net8.0-windows\MoPhongThuatToanLapLich.pdb
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\MoPhongThuatToanLapLich.dll
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\refint\MoPhongThuatToanLapLich.dll
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\MoPhongThuatToanLapLich.pdb
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\MoPhongThuatToanLapLich.genruntimeconfig.cache
+C:\Users\ACER\Source\Repos\nguyenxuanbac88\Scheduling-Algorithm-Simulator\MoPhongThuatToanLapLich\obj\Debug\net8.0-windows\ref\MoPhongThuatToanLapLich.dll

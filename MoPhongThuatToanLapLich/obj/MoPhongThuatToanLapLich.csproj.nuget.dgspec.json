@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Hệ Điều Hành\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich.csproj": {}
+    "C:\\Users\\ACER\\Source\\Repos\\nguyenxuanbac88\\Scheduling-Algorithm-Simulator\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich.csproj": {}
   },
   "projects": {
-    "D:\\Hệ Điều Hành\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich.csproj": {
+    "C:\\Users\\ACER\\Source\\Repos\\nguyenxuanbac88\\Scheduling-Algorithm-Simulator\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Hệ Điều Hành\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich.csproj",
+        "projectUniqueName": "C:\\Users\\ACER\\Source\\Repos\\nguyenxuanbac88\\Scheduling-Algorithm-Simulator\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich.csproj",
         "projectName": "MoPhongThuatToanLapLich",
-        "projectPath": "D:\\Hệ Điều Hành\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich.csproj",
+        "projectPath": "C:\\Users\\ACER\\Source\\Repos\\nguyenxuanbac88\\Scheduling-Algorithm-Simulator\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich.csproj",
         "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\Hệ Điều Hành\\MoPhongThuatToanLapLich\\MoPhongThuatToanLapLich\\obj\\",
+        "outputPath": "C:\\Users\\ACER\\Source\\Repos\\nguyenxuanbac88\\Scheduling-Algorithm-Simulator\\MoPhongThuatToanLapLich\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
