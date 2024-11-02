@@ -19,6 +19,7 @@ namespace MoPhongThuatToanLapLich
             dgvProcesses.BorderStyle = BorderStyle.None;
             lblAvgTurnaroundTime.Text = "Turnaround Time Trung Bình: N/A";
             lblAvgWaitingTime.Text = "Waiting Time Trung Bình: N/A";
+            lblAvgWaitingTime.Text = "Waiting Time Trung Bình: N/A";
         }
 
         private void SetupDataGridView()
