@@ -43,6 +43,8 @@
             lblAvgTurnaroundTime = new Label();
             lblAvgWaitingTime = new Label();
             ganttPanel = new Panel();
+            label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvProcesses).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvResults).BeginInit();
             groupBox1.SuspendLayout();
@@ -83,10 +85,10 @@
             dgvResults.AllowUserToAddRows = false;
             dgvResults.BackgroundColor = SystemColors.ControlLightLight;
             dgvResults.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvResults.Location = new Point(12, 251);
+            dgvResults.Location = new Point(12, 271);
             dgvResults.Name = "dgvResults";
             dgvResults.ReadOnly = true;
-            dgvResults.Size = new Size(535, 196);
+            dgvResults.Size = new Size(535, 187);
             dgvResults.TabIndex = 1;
             // 
             // groupBox1
@@ -142,7 +144,7 @@
             // cmbAlgorithm
             // 
             cmbAlgorithm.FormattingEnabled = true;
-            cmbAlgorithm.Items.AddRange(new object[] { "FCFS", "SJF", "Round Robin", "Priority" });
+            cmbAlgorithm.Items.AddRange(new object[] { "FCFS", "SJF", "Round Robin", "Priority-Pre" });
             cmbAlgorithm.Location = new Point(137, 65);
             cmbAlgorithm.Name = "cmbAlgorithm";
             cmbAlgorithm.Size = new Size(132, 23);
@@ -152,7 +154,7 @@
             // 
             lblAvgTurnaroundTime.AutoSize = true;
             lblAvgTurnaroundTime.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblAvgTurnaroundTime.Location = new Point(553, 270);
+            lblAvgTurnaroundTime.Location = new Point(553, 298);
             lblAvgTurnaroundTime.Name = "lblAvgTurnaroundTime";
             lblAvgTurnaroundTime.Size = new Size(168, 15);
             lblAvgTurnaroundTime.TabIndex = 3;
@@ -162,7 +164,7 @@
             // 
             lblAvgWaitingTime.AutoSize = true;
             lblAvgWaitingTime.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lblAvgWaitingTime.Location = new Point(553, 306);
+            lblAvgWaitingTime.Location = new Point(553, 269);
             lblAvgWaitingTime.Name = "lblAvgWaitingTime";
             lblAvgWaitingTime.Size = new Size(147, 15);
             lblAvgWaitingTime.TabIndex = 4;
@@ -176,12 +178,34 @@
             ganttPanel.Size = new Size(683, 74);
             ganttPanel.TabIndex = 5;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.Location = new Point(12, 39);
+            label3.Name = "label3";
+            label3.Size = new Size(67, 30);
+            label3.TabIndex = 6;
+            label3.Text = "Input";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(12, 238);
+            label4.Name = "label4";
+            label4.Size = new Size(84, 30);
+            label4.TabIndex = 7;
+            label4.Text = "Output";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonFace;
             ClientSize = new Size(780, 562);
+            Controls.Add(label4);
+            Controls.Add(label3);
             Controls.Add(ganttPanel);
             Controls.Add(lblAvgWaitingTime);
             Controls.Add(lblAvgTurnaroundTime);
@@ -215,5 +239,7 @@
         private DataGridViewTextBoxColumn ArrivalTime;
         private DataGridViewTextBoxColumn BurstTime;
         private DataGridViewTextBoxColumn Priority;
+        private Label label3;
+        private Label label4;
     }
 }

@@ -19,7 +19,6 @@ namespace MoPhongThuatToanLapLich
             dgvProcesses.BorderStyle = BorderStyle.None;
             lblAvgTurnaroundTime.Text = "Turnaround Time Trung Bình: N/A";
             lblAvgWaitingTime.Text = "Waiting Time Trung Bình: N/A";
-            lblAvgWaitingTime.Text = "Waiting Time Trung Bình: N/A";
         }
 
         private void SetupDataGridView()
@@ -90,18 +89,18 @@ namespace MoPhongThuatToanLapLich
             {
                 if (row.IsNewRow) continue; // Bỏ qua hàng trống
 
-                Process process = new Process
-                {
-                    ProcessID = row.Cells["ProcessID"].Value.ToString(), // Lấy ProcessID dưới dạng chuỗi
-                    ArrivalTime = Convert.ToInt32(row.Cells["ArrivalTime"].Value),
-                    BurstTime = Convert.ToInt32(row.Cells["BurstTime"].Value),
-                    Priority = row.Cells["Priority"].Value != null ? Convert.ToInt32(row.Cells["Priority"].Value) : 0
-                };
+                string processID = row.Cells["ProcessID"].Value?.ToString() ?? "Unknown"; // Lấy ProcessID, nếu null thì mặc định là "Unknown"
+                int arrivalTime = row.Cells["ArrivalTime"].Value != null ? Convert.ToInt32(row.Cells["ArrivalTime"].Value) : 0;
+                int burstTime = row.Cells["BurstTime"].Value != null ? Convert.ToInt32(row.Cells["BurstTime"].Value) : 0;
+                int priority = row.Cells["Priority"].Value != null ? Convert.ToInt32(row.Cells["Priority"].Value) : 0;
+
+                Process process = new Process(processID, arrivalTime, burstTime, priority);
                 processes.Add(process);
             }
 
             return processes;
         }
+
 
 
         public void FCFS(List<Process> processes)
@@ -125,34 +124,67 @@ namespace MoPhongThuatToanLapLich
 
         public void SJF(List<Process> processes)
         {
-            processes = processes.OrderBy(p => p.ArrivalTime).ThenBy(p => p.BurstTime).ToList();
             int currentTime = 0;
+            int completed = 0;
+            int n = processes.Count;
 
-            foreach (var process in processes)
+            // Đặt cờ hoàn thành cho mỗi tiến trình là `false`
+            bool[] isCompleted = new bool[n];
+
+            while (completed != n)
             {
-                if (currentTime < process.ArrivalTime)
-                    currentTime = process.ArrivalTime;
+                // Tìm tiến trình có Burst Time ngắn nhất trong số các tiến trình đã đến
+                int idx = -1;
+                int minBurstTime = int.MaxValue;
 
-                process.StartTime = currentTime;  // Gán thời gian bắt đầu cho tiến trình
-                process.CompletionTime = currentTime + process.BurstTime;
-                process.TurnaroundTime = process.CompletionTime - process.ArrivalTime;
-                process.WaitingTime = process.TurnaroundTime - process.BurstTime;
+                for (int i = 0; i < n; i++)
+                {
+                    if (processes[i].ArrivalTime <= currentTime && !isCompleted[i] && processes[i].BurstTime < minBurstTime)
+                    {
+                        minBurstTime = processes[i].BurstTime;
+                        idx = i;
+                    }
+                }
 
-                currentTime += process.BurstTime;
+                if (idx != -1)
+                {
+                    // Nếu tìm thấy tiến trình có Burst Time ngắn nhất, tiến trình này sẽ chạy đến khi hoàn thành
+                    processes[idx].StartTime = currentTime;
+                    processes[idx].CompletionTime = currentTime + processes[idx].BurstTime;
+                    processes[idx].TurnaroundTime = processes[idx].CompletionTime - processes[idx].ArrivalTime;
+                    processes[idx].WaitingTime = processes[idx].TurnaroundTime - processes[idx].BurstTime;
+
+                    // Cập nhật thời gian hiện tại và đánh dấu tiến trình hoàn thành
+                    currentTime = processes[idx].CompletionTime;
+                    isCompleted[idx] = true;
+                    completed++;
+                }
+                else
+                {
+                    // Nếu không có tiến trình nào sẵn sàng, tăng `currentTime` lên 1 đơn vị
+                    currentTime++;
+                }
             }
         }
 
+
         public void RoundRobin(List<Process> processes, int quantumTime)
         {
-            int currentTime = 0; // Thời gian hiện tại của hệ thống
-            Queue<Process> queue = new Queue<Process>(); // Hàng đợi để quản lý các tiến trình
-            List<Process> remainingProcesses = new List<Process>(processes); // Danh sách tiến trình chưa hoàn thành
+            if (processes == null || processes.Count == 0 || quantumTime <= 0)
+            {
+                MessageBox.Show("Danh sách tiến trình rỗng hoặc quantum không hợp lệ.");
+                return;
+            }
+
+            int currentTime = 0;
+            Queue<Process> queue = new Queue<Process>();
+            List<Process> remainingProcesses = new List<Process>(processes);
 
             // Khởi tạo RemainingTime cho mỗi tiến trình
             foreach (var process in processes)
             {
-                process.RemainingTime = process.BurstTime; // Đặt RemainingTime ban đầu bằng BurstTime
-                process.StartTime = -1; // Khởi tạo StartTime là -1 để xác định lần đầu tiến trình chạy
+                process.RemainingTime = process.BurstTime;
+                process.StartTime = -1;
             }
 
             // Thêm các tiến trình đã đến vào hàng đợi ban đầu
@@ -164,16 +196,15 @@ namespace MoPhongThuatToanLapLich
 
             while (queue.Count > 0)
             {
-                // Lấy tiến trình đầu tiên trong hàng đợi để thực thi
                 var process = queue.Dequeue();
 
-                // Chỉ gán StartTime nếu đây là lần đầu tiên tiến trình được thực thi
+                // Gán StartTime nếu đây là lần đầu tiên tiến trình được thực thi
                 if (process.StartTime == -1)
                 {
                     process.StartTime = currentTime;
                 }
 
-                // Tiến hành thực thi tiến trình trong khoảng thời gian Quantum hoặc ít hơn nếu gần hoàn thành
+                // Thực hiện tiến trình trong thời gian Quantum hoặc ít hơn nếu gần hoàn thành
                 int timeSlice = Math.Min(quantumTime, process.RemainingTime);
                 process.RemainingTime -= timeSlice;
                 currentTime += timeSlice;
@@ -244,48 +275,66 @@ namespace MoPhongThuatToanLapLich
             lblAvgTurnaroundTime.Text = $"Turnaround Time Trung Bình: {avgTurnaroundTime:F2}";
             lblAvgWaitingTime.Text = $"Waiting Time Trung Bình: {avgWaitingTime:F2}";
         }
-        public void PriorityScheduling(List<Process> processes)
+
+
+        public void PriorityScheduling_Preemptive(List<Process> processes)
         {
-            // Danh sách lưu các tiến trình đã hoàn thành
-            List<Process> completedProcesses = new List<Process>();
             int currentTime = 0;
+            int completed = 0;
+            int n = processes.Count;
 
-            // Sử dụng danh sách tạm thời cho các tiến trình còn lại
-            List<Process> availableProcesses = new List<Process>(processes);
-
-            while (availableProcesses.Count > 0)
+            // Khởi tạo RemainingTime và StartTime cho mỗi tiến trình
+            foreach (var process in processes)
             {
-                // Lọc các tiến trình có ArrivalTime <= currentTime
-                var readyQueue = availableProcesses.Where(p => p.ArrivalTime <= currentTime).OrderBy(p => p.Priority).ToList();
+                process.RemainingTime = process.BurstTime;
+                process.StartTime = -1; // Để xác định lần đầu tiến trình chạy
+            }
+
+            while (completed != n)
+            {
+                // Lọc các tiến trình đã đến và có thời gian chạy còn lại, sắp xếp theo Priority và ArrivalTime
+                var readyQueue = processes
+                    .Where(p => p.ArrivalTime <= currentTime && p.RemainingTime > 0)
+                    .OrderBy(p => p.Priority)
+                    .ThenBy(p => p.ArrivalTime)
+                    .ToList();
 
                 if (readyQueue.Count == 0)
                 {
-                    // Nếu không có tiến trình sẵn sàng, tăng currentTime lên theo tiến trình có ArrivalTime sớm nhất
-                    currentTime = availableProcesses.Min(p => p.ArrivalTime);
+                    // Nếu không có tiến trình nào sẵn sàng, nhảy `currentTime` lên ArrivalTime của tiến trình tiếp theo chưa hoàn thành
+                    currentTime = processes
+                        .Where(p => p.RemainingTime > 0)
+                        .Min(p => p.ArrivalTime);
                     continue;
                 }
 
-                // Lấy tiến trình có Priority cao nhất (Priority nhỏ nhất) trong readyQueue
+                // Chọn tiến trình có độ ưu tiên cao nhất (Priority nhỏ nhất)
                 var process = readyQueue.First();
 
-                // Cập nhật thời gian bắt đầu, hoàn thành, turnaround và waiting cho tiến trình
-                process.StartTime = currentTime;
-                process.CompletionTime = currentTime + process.BurstTime;
-                process.TurnaroundTime = process.CompletionTime - process.ArrivalTime;
-                process.WaitingTime = process.TurnaroundTime - process.BurstTime;
+                // Gán StartTime nếu đây là lần đầu tiên tiến trình được thực thi
+                if (process.StartTime == -1)
+                {
+                    process.StartTime = currentTime;
+                }
 
-                // Thêm tiến trình vào danh sách đã hoàn thành và xóa khỏi availableProcesses
-                completedProcesses.Add(process);
-                availableProcesses.Remove(process);
+                // Thực thi tiến trình trong một đơn vị thời gian
+                process.RemainingTime--;
+                currentTime++;
 
-                // Cập nhật thời gian hiện tại
-                currentTime = process.CompletionTime;
+                // Kiểm tra nếu tiến trình hoàn thành
+                if (process.RemainingTime == 0)
+                {
+                    process.CompletionTime = currentTime;
+                    process.TurnaroundTime = process.CompletionTime - process.ArrivalTime;
+                    process.WaitingTime = process.TurnaroundTime - process.BurstTime;
+                    completed++;
+                }
             }
-
-            // Sao chép các tiến trình hoàn thành trở lại vào danh sách processes để hiển thị kết quả
-            processes.Clear();
-            processes.AddRange(completedProcesses);
         }
+
+
+
+
 
         private void DrawGanttChart(List<Process> processes)
         {
@@ -326,6 +375,18 @@ namespace MoPhongThuatToanLapLich
                 xPosition += width;
             }
         }
+        private void ResetProcessValues(List<Process> processes)
+        {
+            foreach (var process in processes)
+            {
+                process.StartTime = -1;
+                process.CompletionTime = 0;
+                process.TurnaroundTime = 0;
+                process.WaitingTime = 0;
+                process.RemainingTime = process.BurstTime;
+            }
+        }
+
         private void btnRunAlgorithm_Click(object sender, EventArgs e)
         {
             var processes = GetProcessesFromDataGridView();
@@ -335,6 +396,8 @@ namespace MoPhongThuatToanLapLich
                 MessageBox.Show("Vui lòng chọn một thuật toán.");
                 return;
             }
+
+            ResetProcessValues(processes);
 
             switch (cmbAlgorithm.SelectedItem.ToString())
             {
@@ -352,8 +415,8 @@ namespace MoPhongThuatToanLapLich
                     }
                     RoundRobin(processes, quantumTime);
                     break;
-                case "Priority":
-                    PriorityScheduling(processes);
+                case "Priority-Pre":
+                    PriorityScheduling_Preemptive(processes);
                     break;
                 default:
                     MessageBox.Show("Thuật toán không hợp lệ.");
@@ -376,9 +439,13 @@ namespace MoPhongThuatToanLapLich
             public int StartTime { get; set; } = -1;    // Thời gian bắt đầu của tiến trình
             public int Priority { get; set; }     // Chỉ dùng cho Priority Scheduling
             public int RemainingTime { get; set; }  // Thời gian còn lại
-            public Process()
+            public Process(string processID, int arrivalTime, int burstTime, int priority)
             {
-                RemainingTime = BurstTime;  // Khởi tạo RemainingTime bằng BurstTime
+                ProcessID = processID;
+                ArrivalTime = arrivalTime;
+                BurstTime = burstTime;
+                Priority = priority;
+                RemainingTime = burstTime; // Ban đầu, RemainingTime = BurstTime
             }
         }
     }

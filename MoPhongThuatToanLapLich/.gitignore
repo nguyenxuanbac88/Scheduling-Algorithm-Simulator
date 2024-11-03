@@ -1,0 +1,20 @@
+﻿# Thư mục hệ thống của Visual Studio
+.vs/
+
+# Các file biên dịch
+*.exe
+*.dll
+*.pdb
+
+# Thư mục Debug và Release
+[Dd]ebug/
+[Rr]elease/
+[Bb]uild/
+
+# Các tệp khác
+*.user
+*.suo
+*.ipch
+*.cache
+*.obj
+*.log
